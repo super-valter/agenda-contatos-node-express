@@ -1,9 +1,8 @@
 <%- include('./includes/head') %>
 <%- include('./includes/nav') %>
   <div class="container">
-    <div class="row">
-      <div class="col-2"></div>
-      <div class="col-8 my-3">
+    <div class="row d-flex align-items-center justify-content-center">
+      <div class="col-12 col-md-8 my-3">
         <h1 class="text-center">Agenda</h1>
         <p class="text-center lead">
           Seus Contatos estão abaixo
@@ -11,8 +10,18 @@
         <%- include('includes/messages') %>
         <% if (user) { %>
         <% if (contacts.length > 0) { %>
-          <div class="responsive-table">
+          <div class="table-responsive">
             <table class="table my-3">
+              <thead>
+                <tr>
+                  <th scope="col">Nome</th>
+                  <th scope="col">Sobrenome</th>
+                  <th scope="col">E-mail</th>
+                  <th scope="col">Telefone</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
               <% contacts.forEach(contact => { %>              
                 <tr>
                   <td><%= contact.nome %></td>
@@ -35,7 +44,6 @@
           </div>
         <% } %>
       </div>
-      <div class="col-2"></div>
     </div>
   </div>
   <%- include('./includes/footer') %>
