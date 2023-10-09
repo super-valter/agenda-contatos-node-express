@@ -12,26 +12,41 @@
             <div class="row d-flex align-items-center justify-content-center">
                 <div class="col-8">
                     <%- include('includes/messages') %>
-                    <form action="/contato/register" method="post">
+                    <% if (contact._id) { %>
+                        <form action="/contato/edit/<%= contact._id %>" method="post" class="needs-validation-add-contato" novalidate>
+                    <% } else { %>
+                        <form action="/contato/register" method="post" class="needs-validation-add-contato" novalidate>
+                    <% } %>
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                        <div class="mb-3">
-                            <label class="form-label">Nome</label>
-                            <input type="text" name="nome" value="<%= contact.nome %>" class="form-control" required>
+                        <input type="hidden" name="userId" value="<%= user._id %>">
+                        <div class="form-floating mb-3">
+                            <input type="text"  class="form-control" name="nome" value="<%= contact.nome %>" placeholder=".." required>
+                            <label for="name" class="ms-2">Nome</label>
+                            <div class="invalid-feedback">
+                                Por favor digite seu nome.
+                            </div>
                         </div>
-                        <div class="mb-3">
+                        <div class="form-floating mb-3">
+                            <input type="text" name="sobrenome" value="<%= contact.sobrenome %>" class="form-control no-validate" placeholder="..">
                             <label class="form-label">Sobrenome</label>
-                            <input type="text" name="sobrenome" value="<%= contact.sobrenome %>" class="form-control">
                         </div>
-                        <div class="mb-3">
+                        <div class="form-floating mb-3">
+                            <input type="email" name="email" value="<%= contact.email %>" class="form-control no-validate valid-email" placeholder="..">
                             <label class="form-label">Email</label>
-                            <input type="email" name="email" value="<%= contact.email %>" class="form-control">
                         </div>
-                        <div class="mb-3">
+                        <div class="form-floating mb-3">
+                            <input type="tel" name="telefone" value="<%= contact.telefone %>" class="form-control no-validate valid-telefone" placeholder=".." id="phone">
                             <label class="form-label">Telefone</label>
-                            <input type="tel" name="telefone" value="<%= contact.telefone %>" class="form-control">
                         </div>
-        
-                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <div class="lead mb-3 message-tel-email d-none text-danger">
+                            Obrigatório cadastrar e-mail ou telefone.
+                        </div>
+                        <% if (contact._id) { %>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                            <a href="/contato" class="btn-primary ms-5">adicionar outro contato</a>
+                        <% } else { %>
+                            <button type="submit" class="btn btn-primary">Adicionar</button>
+                        <% } %>
                     </form>  
                 </div>
             </div>

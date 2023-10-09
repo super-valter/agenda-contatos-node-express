@@ -1,0 +1,5 @@
+.form-control.no-validate:valid {
+    border-color: #ced4da;
+    padding-right: .75rem;
+    background: none;
+}

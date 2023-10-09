@@ -9,16 +9,31 @@
           Seus Contatos estão abaixo
         </p>
         <%- include('includes/messages') %>
-        <div class="responsive-table">
-          <table class="table my-3">
-            <tr>
-              <td>Valter</td>
-              <td>Valter</td>
-              <td>111111111111</td>
-              <td>email@email</td>
-            </tr>
-          </table>
-        </div>
+        <% if (user) { %>
+        <% if (contacts.length > 0) { %>
+          <div class="responsive-table">
+            <table class="table my-3">
+              <% contacts.forEach(contact => { %>              
+                <tr>
+                  <td><%= contact.nome %></td>
+                  <td><%= contact.sobrenome %></td>
+                  <td><%= contact.email %></td>
+                  <td><%= contact.telefone %></td>
+                  <td><a href="/contato/<%= contact._id %>" class="btn btn-primary">Altera</a></td>
+                  <td><a href="/contato/delete/<%= contact._id %>" class="btn btn-danger">Excluir</a></td>
+                </tr>
+              <% }); %>
+            </table>
+          </div>
+        <% } else { %>
+          <p class="text-center lead">Não existe contato em sua agenda</p>
+        <% } %>
+        <% } else { %>
+          <div class="text-center">
+            <h5>Para vizualizar seus contatos, favor fazer o login</h5>
+            <a href="/login" class="btn btn-primary">Fazer Login</a>
+          </div>
+        <% } %>
       </div>
       <div class="col-2"></div>
     </div>

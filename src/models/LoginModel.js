@@ -4,6 +4,7 @@ const bcryptjs = require('bcryptjs')
 
 const LoginSchema = new mongoose.Schema({
     email: { type: String, required: true },
+    nome: { type: String, required: true },
     password: { type: String, required: true },
 });
 
@@ -75,6 +76,7 @@ class Login {
 
         this.body = {
             email: this.body.email,
+            nome: this.body.nome,
             password: this.body.password
         };
     }

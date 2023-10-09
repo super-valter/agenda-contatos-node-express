@@ -49,7 +49,7 @@ exports.auth = async (req, res) => {
     }
 };
 
-exports.logout = (req, res) =>{
-    req.session.destroy();
+exports.logout = async (req, res) =>{
+    await req.session.destroy();
     res.redirect('/')
 };
